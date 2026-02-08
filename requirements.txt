@@ -3,5 +3,4 @@ pandas
 numpy
 matplotlib
 plotly
-sqlite3
 openpyxl
