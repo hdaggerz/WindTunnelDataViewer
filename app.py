@@ -4,7 +4,6 @@ import plotly.express as px
 import streamlit as st
 
 import sqlite3
-import matplotlib.pyplot as plt 
 
 #@st.cache_resource
 def get_db_connection():

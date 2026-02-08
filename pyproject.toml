@@ -5,6 +5,8 @@ description = "Viewer for wind tunnel data"
 dependencies = [
     "pandas",
     "numpy",
-    "openpyxl"
-    "streamlit"
+    "openpyxl",
+    "streamlit",
+    "sqlite3",
+    "plotly"
 ]
