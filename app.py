@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+from utils.units import Units
 
 import sqlite3
 
@@ -12,6 +13,8 @@ def get_db_connection():
 
 con = get_db_connection()
 
+st.title("Wind Tunnel Data Explorer")
+
 @st.cache_data
 def get_param_list(_con):
      query = """SELECT group_concat(name, '|') FROM pragma_table_info('TestDetailed');"""
@@ -21,14 +24,11 @@ def get_param_list(_con):
 
 paramList = get_param_list(con)
 paramList  = tuple(set(paramList) - set(['id']))
+# paramList  = tuple(set(paramList) - set(['id:1']))
 
 
-independentVars = ('FrontRideHeight', 'RearRideHeight', 'aFW', 'aRW', 'BGurney', 'FreeStreamVelocity', 'RoadSpeed', 'AmbientTemperature', 'AmbientPressure')
+independentVars = ('FrontRideHeight', 'RearRideHeight', 'aFW', 'aRW', 'BGurney', 'FreeStreamVelocity', 'RoadSpeed')
 dependentVars  = tuple(set(paramList) - set(independentVars))
-
-query = """SELECT DISTINCT RunId FROM TestDetailed;"""
-df = pd.read_sql_query(query, con)
-runList = df['RunId'].tolist()
 
 st.sidebar.write("Select x and y variables")
 
@@ -70,14 +70,20 @@ for i in range(0, len(allColumns)):
             )
             df = df[df[col] == filterValue]
 
+xUnits = Units[xSelection]
+yUnits = Units[ySelection]
+
 fig = px.line(
     df,
     x=xSelection,
     y=ySelection,
-    color=overLayBy
+    color=overLayBy,
+    labels={xSelection: f"{xSelection} ({xUnits})", ySelection: f"{ySelection} ({yUnits})"}
 )
 
 st.plotly_chart(fig, use_container_width=True)
+
+st.divider()
 
 st.write(df)
 

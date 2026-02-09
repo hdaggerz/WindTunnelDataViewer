@@ -1,0 +1,17 @@
+Units = {
+    "aFW": "°",
+    "aRW": "°",
+    "FrontRideHeight": "mm",
+    "RearRideHeight": "mm",
+    "FreeStreamVelocity": "m/s",
+    "RoadSpeed": "m/s",
+    "BGurney": "Boolean",
+    'TotalDF': "N",
+    'FrontDF': "N",
+    'RearDF': "N",
+    'TotalDrag': "N",
+    'FrontWheelDrag': "N",
+    'RearWheelDrag': "N",
+    'BodyDrag': "N",
+    'Balance': "-",
+    'L_D': "-"}

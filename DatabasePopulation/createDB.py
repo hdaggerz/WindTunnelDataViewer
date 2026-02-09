@@ -42,8 +42,25 @@ CREATE TABLE Test(
     , YawMoment FLOAT
     , BodyDrag FLOAT)""")
 
-#cur.execute("""CREATE VIEW TestDetailed As SELECT Test.*, Run.* FROM Test INNER JOIN Run ON Test.RunId = Run.id""")
-
+cur.execute("""DROP VIEW IF EXISTS TestDetailed""")
+cur.execute("""CREATE VIEW TestDetailed As 
+	SELECT Run.aFW, 
+	Run.aRW, 
+	Test.FrontRideHeight,
+	Test.RearRideHeight,
+	Run.FreeStreamVelocity, 
+	Run.RoadSpeed,
+	Run.BGurney,
+	Test.FrontDF,
+	Test.RearDF,
+	Test.TotalDF,
+	Test.FrontWheelDrag,
+	Test.RearWheelDrag,
+	Test.BodyDrag,
+	Test.Balance,
+	Test.L_D	
+	FROM Test INNER JOIN Run ON Test.RunId = Run.id""")
+	
 con.commit()
 
 																														

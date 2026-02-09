@@ -2,7 +2,8 @@ import pandas as pd
 import sqlite3
 
 con = sqlite3.connect("WindTunnel.db")
-query = """SELECT DISTINCT RunId FROM TestDetailed;"""
+query = """SELECT group_concat(name, '|') FROM pragma_table_info('TestDetailed');"""
 df = pd.read_sql_query(query, con)
-print(df['RunId'].tolist())
+paramList = df.iloc[0,0].split("|")
+print(paramList)
 con.close()

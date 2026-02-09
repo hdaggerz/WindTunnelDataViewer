@@ -47,6 +47,7 @@ class GroupSet:
         ambient_df = ambient_df.set_index("Ambient Parameters").T  # transpose
         ambient_df = ambient_df.apply(pd.to_numeric, errors="coerce")
         ambient_df.reset_index(drop=True, inplace=True)
+        ambient_df['Free Stream Velocity'] = ambient_df['Free Stream Velocity'].round(0)
         self.ambientData = ambient_df
 
     def _readWheelDrag(self):
